@@ -5,6 +5,7 @@ import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -33,10 +34,17 @@ public class Category {
   )
   private List<Item> items = new ArrayList<>();
 
-  @ManyToOne
+  // @~ToOne default값 EAGER(즉시로딩), 실무에서는 사용안하는게 좋음, LAZY(지연로딩)로 변경 해 주자
+  @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "parent_id")
   private Category parent;
 
+  // @~ToMany default값 LAZY(지연로딩) 그대로 사용
   @OneToMany(mappedBy = "parent")
   private List<Category> child = new ArrayList<>();
+
+  public void addChildCategory(Category child) {
+    this.child.add(child);
+    child.setParent(this);
+  }
 }
