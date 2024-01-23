@@ -2,7 +2,6 @@ package jpabook.jpashop.service;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Transient;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,7 +16,7 @@ public class ItemService {
 
   private final ItemRepository itemRepository;
 
-  @Transient
+  @Transactional
   public void saveItem(Item item) {
     itemRepository.save(item);
   }
