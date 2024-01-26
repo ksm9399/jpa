@@ -45,19 +45,19 @@ public class OrderRepository {
       else {
         jpql += " and";
       }
-      jpql += "o.status = :status";
+      jpql += " o.orderStatus = :status";
     }
 
     // 회원 이름 검색
     if (StringUtils.hasText(orderSearch.getMemberName())) {
       if (isFirstCondition) {
-        jpql = " where";
+        jpql += " where";
         isFirstCondition = false;
       }
       else {
-        jpql = " and";
+        jpql += " and";
       }
-      jpql += "m.name like :name";
+      jpql += " m.name like :name";
     }
 
     TypedQuery<Order> query =
@@ -67,7 +67,7 @@ public class OrderRepository {
     if (orderSearch.getOrderStatus() != null) {
       query = query.setParameter("status", orderSearch.getOrderStatus());
     }
-    if (orderSearch.getMemberName() != null) {
+    if (orderSearch.getMemberName() != null && !orderSearch.getMemberName().equals("")) {
       query = query.setParameter("name", orderSearch.getMemberName());
     }
 
