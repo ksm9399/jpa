@@ -1,0 +1,22 @@
+# 디비 연결
+spring:
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  # jpa
+  jpa:
+    hibernate:
+      # create - 기존테이블 삭제 후 다시 생성 (DROP + CREATE) - 운영에는 절대 사용X (개발 초기)
+      # create-drop - create와 같으나 종료시점에 테이블 DROP - 운영에는 절대 사용X
+      # update - 변경분만 반영(운영DB에는 사용하면 안됨) - 운영에는 절대 사용X (개발 초기, 테스트 서버)
+      # validate - 엔티티와 테이블이 정상 매핑되었는지만 확인 (테스트 서버, 스테이징 및 운영)
+      # none - 사용하지 않음 (스테이징 및 운영)
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        '[format_sql]': true
+        '[use_sql_comments]': true
