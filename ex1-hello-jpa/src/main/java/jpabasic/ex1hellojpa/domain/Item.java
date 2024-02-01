@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.Setter;
@@ -25,4 +26,7 @@ public class Item {
 
   @OneToMany(mappedBy = "item")
   private List<OrderItem> orderItems = new ArrayList<>();
+
+  @ManyToMany(mappedBy = "items")
+  private List<Category> categories = new ArrayList<>();
 }
