@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,12 +22,9 @@ public class Member {
 
   private String name;
 
-  private String city;
-
-  private String street;
-
-  private String zipcode;
-
   @OneToMany(mappedBy = "member")
   private List<Order> orders = new ArrayList<>();
+
+  @Embedded
+  private Address address;
 }

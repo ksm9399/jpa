@@ -1,6 +1,7 @@
 package jpabasic.ex1hellojpa.domain;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -14,14 +15,11 @@ public class Delivery {
   @Column(name = "DELIVERT_ID")
   private Long id;
 
-  private String city;
-
-  private String street;
-
-  private String zipcode;
-
   private DeliveryStatus status;
 
   @OneToOne(mappedBy = "delivery", fetch = FetchType.LAZY)
   private Order order;
+
+  @Embedded
+  private Address address;
 }
