@@ -6,13 +6,14 @@ import org.springframework.stereotype.Repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
+import lombok.RequiredArgsConstructor;
 import spring.jpa.domain.Member;
 
 @Repository
+@RequiredArgsConstructor
 public class MemberRepository {
 
-  @PersistenceContext
-  private EntityManager em;
+  private final EntityManager em;
 
   public void save(Member member) {
     em.persist(member);
